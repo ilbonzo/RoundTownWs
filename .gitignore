@@ -1,4 +1,5 @@
 vendor/
 composer.phar
-
+silex.log
 .idea
+cache/*
