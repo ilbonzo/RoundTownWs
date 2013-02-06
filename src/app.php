@@ -16,4 +16,8 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
 
     return $twig;
 }));
+
+require_once __DIR__.'/../src/models.php';
+require_once __DIR__.'/../src/controllers.php';
+
 return $app;

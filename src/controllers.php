@@ -23,22 +23,6 @@ $app->error(function (\Exception $e, $code) use ($app) {
 });
 
 
-//Towns
-$app->get('/api/towns', function (Request $request) use ($app, $towns) {
-    $callback = $request->query->get('callback');
-    $response = new JsonResponse($towns,200,array('Content-Type' => 'application/json'));
-    $response->setCallback($callback);
-    return $response;
-});
-
-//Town
-$app->get('/api/town/{id}', function ($id) use ($app, $towns) {
-    $callback = $request->query->get('callback');
-    $response = new JsonResponse($towns[$id],200,array('Content-Type' => 'application/json'));
-    $response->setCallback($callback);
-    return $response;
-});
-
 //Feeds
 $app->get('/api/feeds', function (Request $request) use ($app, $feeds) {
     $callback = $request->query->get('callback');
