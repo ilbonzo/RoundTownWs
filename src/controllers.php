@@ -41,11 +41,24 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
         //    return new JsonResponse('error', 200, array('Content-Type' => 'application/json'));
         //}
         $json = array();
-        //@TODO read feed
-        //$feed->load($cursor['url']);
-
+        $feed = $app['simplepie'];
+        $feed->set_feed_url($cursor['url']);
+        $feed->set_item_class();
+        $feed->enable_cache(false);
+        //$feed->enable_cache(true);
+        //$feed->set_cache_duration(3600);
+        //$feed->set_cache_location('cache');
+        $feed->init();
+        $feed->handle_content_type();
+        $news = array();
+        foreach($feed->get_items() as $item) {
+            $n = array();
+            $n['title'] = $item->get_title();
+            $n['description'] = $item->get_description();
+            $news[] = $n;
+        }
         $callback = $request->query->get('callback');
-        $response = new JsonResponse($json,200,array('Content-Type' => 'application/json'));
+        $response = new JsonResponse($news,200,array('Content-Type' => 'application/json'));
     }
 
     $response->setCallback($callback);

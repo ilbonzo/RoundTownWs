@@ -3,6 +3,7 @@ use Silex\Application;
 use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
+use SimplePie as SP;
 
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
@@ -11,11 +12,15 @@ $app->register(new TwigServiceProvider(), array(
     'twig.path'    => array(__DIR__.'/../views'),
     'twig.options' => array('cache' => __DIR__.'/../cache'),
 ));
-$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
-    // add custom globals, filters, tags, ...
 
+$app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
     return $twig;
 }));
+
+//add simplepie
+$app['simplepie'] = function() {
+    return new SimplePie();
+};
 
 require_once __DIR__.'/../src/models.php';
 require_once __DIR__.'/../src/controllers.php';
