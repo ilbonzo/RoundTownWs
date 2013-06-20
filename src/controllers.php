@@ -28,7 +28,12 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
     $collection_name = 'feeds';
     $collection = $connection->selectCollection($db, $collection_name);
     if ($id === '') {
-        $cursor = $collection->find();
+        $feedQuery = array();
+        $tag = $request->get('tag');
+        if (!empty($tag)) {
+            $feedQuery = array('tag' => $tag);
+        }
+        $cursor = $collection->find($feedQuery);
         $feeds = array();
         foreach($cursor as $document) {
             $feeds[] = $document;
@@ -55,6 +60,9 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
             $n = array();
             $n['title'] = $item->get_title();
             $n['description'] = $item->get_description();
+            $n['date'] = $item->get_date('j-n-Y');
+            $n['author'] = $item->get_author()->get_name();
+            $n['link'] = $item->get_link();
             $news[] = $n;
         }
         $callback = $request->query->get('callback');
