@@ -72,3 +72,26 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
     $response->setCallback($callback);
     return $response;
 })->value('id', '');
+
+
+//foursquare
+$app->get('/foursquare/oauth', function () use ($app) {
+    $auth = $app['foursquare']->auth(FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_ID, 'http://api.sanzvan.it/foursquare/oauth');
+    //if no code and no session
+    if(!isset($_GET['code']) && !isset($_SESSION['token'])) {
+        //redirect to login
+        $login = $auth->getLoginUrl();
+        header('Location: '.$login);
+        exit;
+    }
+
+    //Code is returned back from foursquare
+    if(isset($_GET['code'])) {
+        //save it to session
+        $access = $auth->getAccess($_GET['code']);
+        $_SESSION['token'] = $access['access_token'];
+
+    }
+    print_r($_SESSION['token']);
+});
+

@@ -4,6 +4,9 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use SimplePie as SP;
+require_once 'eden.php';
+
+require_once '../config/config.php';
 
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
@@ -20,6 +23,11 @@ $app['twig'] = $app->share($app->extend('twig', function($twig, $app) {
 //add simplepie
 $app['simplepie'] = function() {
     return new SimplePie();
+};
+
+//add eden
+$app['foursquare'] = function() {
+    return eden('foursquare');
 };
 
 require_once __DIR__.'/../src/models.php';

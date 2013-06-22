@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "2034d4418f5b8913c868ff570e703cf0",
+    "hash": "618f186e1ed13bdb0a53081dfa1750f2",
     "packages": [
         {
             "name": "doctrine/common",
@@ -33,7 +33,6 @@
                     "Doctrine\\Common": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -103,7 +102,6 @@
                     "Doctrine\\DBAL": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -166,7 +164,6 @@
                     "Monolog": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -214,7 +211,6 @@
                     "Pimple": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -238,12 +234,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/fabpot/Silex.git",
-                "reference": "a6dde11a6494e2c116326ca91b0066475e825a52"
+                "reference": "d877687625a51b1a1ed311b95e158148aa2d68ca"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fabpot/Silex/zipball/a6dde11a6494e2c116326ca91b0066475e825a52",
-                "reference": "a6dde11a6494e2c116326ca91b0066475e825a52",
+                "url": "https://api.github.com/repos/fabpot/Silex/zipball/d877687625a51b1a1ed311b95e158148aa2d68ca",
+                "reference": "d877687625a51b1a1ed311b95e158148aa2d68ca",
                 "shasum": ""
             },
             "require": {
@@ -312,7 +308,7 @@
             "keywords": [
                 "microframework"
             ],
-            "time": "2013-06-06 07:02:30"
+            "time": "2013-06-19 14:39:26"
         },
         {
             "name": "simplepie/simplepie",
@@ -396,7 +392,6 @@
                     "lib/swift_required.php"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "LGPL"
             ],
@@ -449,7 +444,6 @@
                     "Symfony\\Component\\BrowserKit": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -491,7 +485,6 @@
                     "Symfony\\Component\\Config": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -533,7 +526,6 @@
                     "Symfony\\Component\\Console": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -575,7 +567,6 @@
                     "Symfony\\Component\\CssSelector": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -623,7 +614,6 @@
                     "Symfony\\Component\\DomCrawler": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -672,7 +662,6 @@
                     "Symfony\\Component\\EventDispatcher": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -714,7 +703,6 @@
                     "Symfony\\Component\\Filesystem": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -756,7 +744,6 @@
                     "Symfony\\Component\\Finder": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -809,7 +796,6 @@
                     "Symfony\\Component\\Form": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -852,7 +838,6 @@
                     "SessionHandlerInterface": "Symfony/Component/HttpFoundation/Resources/stubs"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -914,7 +899,6 @@
                     "Symfony\\Component\\HttpKernel": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -959,7 +943,6 @@
                     "Symfony\\Component\\Locale": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1003,7 +986,6 @@
                     "Symfony\\Bridge\\Monolog": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1045,7 +1027,6 @@
                     "Symfony\\Component\\OptionsResolver": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1092,7 +1073,6 @@
                     "Symfony\\Component\\Process": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1112,17 +1092,17 @@
         },
         {
             "name": "symfony/routing",
-            "version": "v2.3.0",
+            "version": "v2.3.1",
             "target-dir": "Symfony/Component/Routing",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/Routing.git",
-                "reference": "v2.3.0"
+                "reference": "v2.3.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/v2.3.0",
-                "reference": "v2.3.0",
+                "url": "https://api.github.com/repos/symfony/Routing/zipball/v2.3.1",
+                "reference": "v2.3.1",
                 "shasum": ""
             },
             "require": {
@@ -1210,7 +1190,6 @@
                     "Symfony\\Component\\Security": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1252,7 +1231,6 @@
                     "Symfony\\Component\\Serializer": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1302,7 +1280,6 @@
                     "Symfony\\Component\\Translation": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1361,7 +1338,6 @@
                     "Symfony\\Bridge\\Twig": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1413,7 +1389,6 @@
                     "Symfony\\Component\\Validator": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1459,7 +1434,6 @@
                     "Twig_": "lib/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "BSD-3"
             ],
