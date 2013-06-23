@@ -4,7 +4,8 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use SimplePie as SP;
-require_once 'eden.php';
+require_once '../modules/eden/library/eden.php';
+require_once '../modules/eden/library/eden/foursquare.php';
 
 require_once '../config/config.php';
 

@@ -36,14 +36,14 @@ $console
         $connection = new Mongo("mongodb://$host:27017");
         $connection->dropDB($db_name);
         $db = $connection->selectDB($db_name);
-        $db->createCollection("feeds",false); 
+        $db->createCollection("feeds",false);
         $feeds_collection = $db->feeds;
 
         $keys = array();
         $remote_csv = 'https://docs.google.com/spreadsheet/pub?key=0Al-GRHJsbJ6FdGdBTzFTWG5maVphYWYyNUQxOTBTMFE&single=true&gid=0&output=csv';
         mb_internal_encoding('UTF-8');
         print $remote_csv."\n";
-        /* Set internal character encoding to UTF-8 */
+        // Set internal character encoding to UTF-8
         if (($handle = fopen($remote_csv, "r")) !== FALSE) {
             $line = 0;
             $deps = array();
