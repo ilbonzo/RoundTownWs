@@ -76,32 +76,17 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
 
 //foursquare
 $app->get('api/images',function (Request $request) use ($app) {
-    define ('URL_VENUE_PHOTOS', 'https://api.foursquare.com/v2/venues/%s/photos');
-    print FOURSQUARE_ACCESS_TOKEN;
-    $users = $app['foursquare']->users(FOURSQUARE_ACCESS_TOKEN);
-    print_r($users->getList());
+
+    $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
+    print_r($venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue'));
     print '<hr/>';
-
-    //$lists = $app['foursquare']->lists(FOURSQUARE_ACCESS_TOKEN);
-    //print_r(lists);
-    //print '<hr/>';
-
-    $venue = $app['foursquare']->venue(FOURSQUARE_ACCESS_TOKEN);
-    print_r($venue->getVenuePhoto('4c6fd9eed274b60ca4aed70d','venue'));
-    print '<hr/>';
-    print_r($venue->getVenueMenu('4c6fd9eed274b60ca4aed70d'));
-    print '<hr/>';
-    print_r($venue->getSimilarVenues('4c6fd9eed274b60ca4aed70d'));
-
-
-
     exit;
 
 });
 
 
 $app->get('/utility/foursquare/oauth', function () use ($app) {
-    $auth = $app['foursquare']->auth(FOURSQUARE_CLIENT_ID, FOURSQUARE_CLIENT_SECRET, 'http://api.sanzvan.it/utility/foursquare/oauth');
+    $auth = $app['foursquare']->auth($app['config']['foursquare']['client_id'], $app['config']['foursquare']['client_secret'], $app['config']['foursquare']['uri_redirect']);
     //if no code and no session
     if(!isset($_GET['code'])) {
         //redirect to login

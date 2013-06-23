@@ -7,11 +7,11 @@ use SimplePie as SP;
 require_once '../modules/eden/library/eden.php';
 require_once '../modules/eden/library/eden/foursquare.php';
 
-require_once '../config/config.php';
-
 $app = new Application();
 $app->register(new UrlGeneratorServiceProvider());
 $app->register(new ValidatorServiceProvider());
+
+$app->register(new DerAlex\Silex\YamlConfigServiceProvider(__DIR__ . '/../config/settings.yml'));
 $app->register(new TwigServiceProvider(), array(
     'twig.path'    => array(__DIR__.'/../views'),
     'twig.options' => array('cache' => __DIR__.'/../cache'),

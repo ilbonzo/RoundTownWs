@@ -1,5 +1,4 @@
 <?php
-require_once __DIR__.'/../config/db.php';
 
-$connection = new Mongo("mongodb://$host:27017");
-$db = $connection->selectDB($db_name);
+$connection = new Mongo("mongodb://" . $app['config']['db']['host'] . ":27017");
+$db = $connection->selectDB($app['config']['db']['name']);

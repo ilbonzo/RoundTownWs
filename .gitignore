@@ -4,4 +4,4 @@ silex.log
 .idea
 nbproject/*
 cache/*
-config/*
+config/settings.yml
