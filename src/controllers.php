@@ -78,10 +78,19 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
 $app->get('api/images',function (Request $request) use ($app) {
 
     $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
-    print_r($venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue'));
-    print '<hr/>';
-    exit;
-
+    $result = $venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue');
+    $photos = array();
+    foreach ($result['response']['photos']['items'] as $item) {
+        $p['url'] = $item['prefix'] . 'width960' . $item['suffix'];
+        $p['url_thumb'] = $item['prefix'] . '150x150' . $item['suffix'];
+        isset($item['user']['lastName']) ? $lastName = ' ' . $item['user']['lastName'] : $lastName = '';
+        $p['user'] = $item['user']['firstName'] . $lastName;
+        $photos[] = $p;
+    }
+    $callback = $request->query->get('callback');
+    $response = new JsonResponse($photos,200,array('Content-Type' => 'application/json'));
+    $response->setCallback($callback);
+    return $response;
 });
 
 
