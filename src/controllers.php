@@ -24,7 +24,7 @@ $app->error(function (\Exception $e, $code) use ($app) {
 
 
 //Feeds
-$app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connection, $db) {
+$app->get('/1.0/feeds/{id}', function (Request $request, $id) use ($app, $connection, $db) {
     $collection_name = 'feeds';
     $collection = $connection->selectCollection($db, $collection_name);
     if ($id === '') {
@@ -36,7 +36,12 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
         $cursor = $collection->find($feedQuery);
         $feeds = array();
         foreach($cursor as $document) {
-            $feeds[] = $document;
+            //$feeds[] = $document;
+            $feed['id'] = $document['_id']->{'$id'};
+            $feed['title'] = $document['title'];
+            $feed['url'] = $document['url'];
+            $feed['tag'] = $document['tag'];
+            $feeds[] = $feed;
         }
         $callback = $request->query->get('callback');
         $response = new JsonResponse($feeds,200,array('Content-Type' => 'application/json'));
@@ -75,7 +80,7 @@ $app->get('/api/feeds/{id}', function (Request $request, $id) use ($app, $connec
 
 
 //foursquare
-$app->get('api/images',function (Request $request) use ($app) {
+$app->get('1.0/images',function (Request $request) use ($app) {
 
     $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
     $result = $venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue');
