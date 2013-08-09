@@ -2,26 +2,26 @@ RoundTownWs
 ===========
 
 
-API 1.0
+API 1.0 
 
 
-/feeds
-Will return list of feeds
+_/feeds_  
+Will return list of feeds 
 
-/feeds?tag=:tag
-Will return list of feeds with tag
+_/feeds?tag=:tag_  
+Will return list of feeds with tag 
 
-/feeds/:id
-Will return list of news of feed
+_/feeds/:id_  
+Will return list of news of feed 
 
-/images
-Will return list of images
+_/images_  
+Will return list of images 
 
-/places
-Will return list of places
+_/places_  
+Will return list of places 
 
-/places/:id
-Will return details of place
+_/places/:id_  
+Will return details of place 
 
-/places/:id/images
-Will return list of images of the place
+_/places/:id/images_  
+Will return list of images of the place 
