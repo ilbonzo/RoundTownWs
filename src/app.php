@@ -4,6 +4,8 @@ use Silex\Provider\TwigServiceProvider;
 use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use SimplePie as SP;
+use RoundTownWs\Utils\PlaceUtility;
+
 require_once '../modules/eden/library/eden.php';
 require_once '../modules/eden/library/eden/foursquare.php';
 
@@ -33,6 +35,11 @@ $app['simplepie'] = function() {
 //add eden
 $app['foursquare'] = function() {
     return eden('foursquare');
+};
+
+//add utils
+$app['placeutility'] = function () {
+    return new PlaceUtility();
 };
 
 require_once __DIR__.'/../src/models.php';

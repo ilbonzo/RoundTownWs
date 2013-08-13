@@ -108,7 +108,6 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
 
         $places = array();
         foreach ($result['response']['venues'] as $item) {
-
             isset($item['location']['address']) ? $address = $item['location']['address'] : $address = '';
             isset($item['contact']['phone']) ? $phone = $item['contact']['phone'] : $phone = '';
             isset($item['contact']['twitter']) ? $twitter = $item['contact']['twitter'] : $twitter = '';
@@ -117,6 +116,8 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
                 'id' => $item['id'],
                 'name' => $item['name'],
                 'address' => $address,
+                'lat' => $item['location']['lat'],
+                'lng' => $item['location']['lng'],
                 'phone' => $phone,
                 'twitter' => $twitter,
                 'url' => $url,
@@ -124,6 +125,10 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
             ];
             $places[] = $p;
         }
+        usort($places, function($a, $b) use ($app) {
+            return $app['placeutility']->sortByName($a, $b);
+        });
+
         $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $places]), 200,array('Content-Type' => 'application/json'));
     } else {
         $result = $venue->getVenue($id);
@@ -132,6 +137,8 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
         isset($item['contact']['phone']) ? $phone = $item['contact']['phone'] : $phone = '';
         isset($item['contact']['twitter']) ? $twitter = $item['contact']['twitter'] : $twitter = '';
         isset($item['url']) ? $url = $item['url'] : $url = '';
+
+        (count($item['photos']['groups']) > 0) ? $image = $app['placeutility']->getImageByGroups($item['photos']['groups'], 'minithumb') : $image = '';
         if ($item['tips']['count'] > 0) {
             $tips = $item['tips']['groups'][0]['items'];
         } else {
@@ -140,11 +147,15 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
         $place = [
                 'id' => $item['id'],
                 'name' => $item['name'],
+                'image' => $image,
                 'address' => $address,
+                'lat' => $item['location']['lat'],
+                'lng' => $item['location']['lng'],
                 'phone' => $phone,
                 'twitter' => $twitter,
                 'url' => $url,
                 'foursquare' => $item['canonicalUrl'],
+                'categories' => $item['categories'],
                 'tips' => $tips
             ];
         $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $place]), 200,array('Content-Type' => 'application/json'));
