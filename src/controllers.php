@@ -104,8 +104,13 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
     if ($id === '') {
         $venue->setLimit(50);
         $venue->setRadius(2000);
-        $result = $venue->search(null, $app['config']['geo']['latitude'], $app['config']['geo']['longitude']);
-
+        $tag = $request->get('tag');
+        if (!empty($tag)) {
+            $tagsArray = array($tag);
+        } else {
+            $tagsArray = NULL;
+        }
+        $result = $venue->search(null, $app['config']['geo']['latitude'], $app['config']['geo']['longitude'],$tagsArray);
         $places = array();
         foreach ($result['response']['venues'] as $item) {
             isset($item['location']['address']) ? $address = $item['location']['address'] : $address = '';
