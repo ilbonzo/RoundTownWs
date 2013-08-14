@@ -8,6 +8,7 @@ use RoundTownWs\Utils\PlaceUtility;
 
 require_once '../modules/eden/library/eden.php';
 require_once '../modules/eden/library/eden/foursquare.php';
+require_once '../modules/eden/library/eden/twitter.php';
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -32,9 +33,14 @@ $app['simplepie'] = function() {
     return new SimplePie();
 };
 
-//add eden
+//add eden foursquare
 $app['foursquare'] = function() {
     return eden('foursquare');
+};
+
+//add eden twitter
+$app['twitter'] = function() {
+    return eden('twitter');
 };
 
 //add utils
