@@ -1,0 +1,3 @@
+[submodule "modules/eden"]
+	path = modules/eden
+	url = https://github.com/ilbonzo/eden
