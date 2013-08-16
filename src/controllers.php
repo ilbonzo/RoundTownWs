@@ -44,7 +44,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
             $feed['tag'] = $document['tag'];
             $feeds[] = $feed;
         }
-        $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $feeds]), 200,array('Content-Type' => 'application/json'));
+        $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $feeds)), 200,array('Content-Type' => 'application/json'));
     } else {
         $cursor = $collection->findOne(array('_id' => new MongoId($id)));
         $json = array();
@@ -67,7 +67,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
                 $n['link'] = $item->get_link();
                 $news[] = $n;
             }
-            $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $news]), 200,array('Content-Type' => 'application/json'));
+            $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $news)), 200,array('Content-Type' => 'application/json'));
         } else {
             $response = new JsonResponse('', 503, array('Content-Type' => 'application/json'));
         }
@@ -92,7 +92,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/images',function (Request
         $p['user'] = $item['user']['firstName'] . $lastName;
         $photos[] = $p;
     }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $photos]), 200,array('Content-Type' => 'application/json'));
+    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $photos)), 200,array('Content-Type' => 'application/json'));
     return $response;
 });
 
@@ -117,7 +117,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
             isset($item['contact']['phone']) ? $phone = $item['contact']['phone'] : $phone = '';
             isset($item['contact']['twitter']) ? $twitter = $item['contact']['twitter'] : $twitter = '';
             isset($item['url']) ? $url = $item['url'] : $url = '';
-            $p = [
+            $p = array(
                 'id' => $item['id'],
                 'name' => $item['name'],
                 'address' => $address,
@@ -127,14 +127,14 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
                 'twitter' => $twitter,
                 'url' => $url,
                 'foursquare' => $item['canonicalUrl']
-            ];
+            );
             $places[] = $p;
         }
         usort($places, function($a, $b) use ($app) {
             return $app['placeutility']->sortByName($a, $b);
         });
 
-        $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $places]), 200,array('Content-Type' => 'application/json'));
+        $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $places)), 200,array('Content-Type' => 'application/json'));
     } else {
         $result = $venue->getVenue($id);
         $item = $result['response']['venue'];
@@ -149,7 +149,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
         } else {
             $tips = '';
         }
-        $place = [
+        $place = array(
                 'id' => $item['id'],
                 'name' => $item['name'],
                 'image' => $image,
@@ -162,8 +162,8 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
                 'foursquare' => $item['canonicalUrl'],
                 'categories' => $item['categories'],
                 'tips' => $tips
-            ];
-        $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $place]), 200,array('Content-Type' => 'application/json'));
+            );
+        $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $place)), 200,array('Content-Type' => 'application/json'));
     }
 
     return $response;
@@ -183,7 +183,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}/images', func
         $p['user'] = $item['user']['firstName'] . $lastName;
         $photos[] = $p;
     }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $photos]), 200,array('Content-Type' => 'application/json'));
+    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $photos)), 200,array('Content-Type' => 'application/json'));
     return $response;
 });
 
@@ -203,7 +203,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/tweets',function (Request
         $t['url'] = 'https://twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'];
         $tweets[] = $t;
     }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], ['data' => $tweets]), 200,array('Content-Type' => 'application/json'));
+    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
     return $response;
 });
 
