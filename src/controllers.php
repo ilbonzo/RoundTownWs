@@ -59,11 +59,12 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
         if ($feedResult) {
             $feed->handle_content_type();
             foreach($feed->get_items() as $item) {
+                is_null($item->get_author()) ? $author = '' : $author = $item->get_author()->get_name();
                 $n = array();
                 $n['title'] = $item->get_title();
                 $n['description'] = $item->get_description();
                 $n['date'] = $item->get_date('j-n-Y');
-                $n['author'] = $item->get_author()->get_name();
+                $n['author'] = $author;
                 $n['link'] = $item->get_link();
                 $news[] = $n;
             }
