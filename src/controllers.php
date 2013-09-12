@@ -118,6 +118,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
             isset($item['contact']['phone']) ? $phone = $item['contact']['phone'] : $phone = '';
             isset($item['contact']['twitter']) ? $twitter = $item['contact']['twitter'] : $twitter = '';
             isset($item['url']) ? $url = $item['url'] : $url = '';
+            isset($item['categories'][0]) ? $icon = $item['categories'][0]['icon']['prefix'] . 'bg_88' . $item['categories'][0]['icon']['suffix'] : $icon = 'https://foursquare.com/img/categories_v2/none_bg_88.png';
             $p = array(
                 'id' => $item['id'],
                 'name' => $item['name'],
@@ -127,7 +128,8 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
                 'phone' => $phone,
                 'twitter' => $twitter,
                 'url' => $url,
-                'foursquare' => $item['canonicalUrl']
+                'foursquare' => $item['canonicalUrl'],
+                'icon' => $icon
             );
             $places[] = $p;
         }
