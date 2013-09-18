@@ -61,7 +61,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
             foreach($feed->get_items() as $item) {
                 is_null($item->get_author()) ? $author = '' : $author = $item->get_author()->get_name();
                 $n = array();
-                $n['title'] = $item->get_title();
+                $n['title'] = html_entity_decode($item->get_title());
                 $n['description'] = $item->get_description();
                 $n['date'] = $item->get_date('j-n-Y');
                 $n['author'] = $author;
