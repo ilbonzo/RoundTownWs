@@ -32,7 +32,11 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
         $feedQuery = array();
         $tag = $request->get('tag');
         if (!empty($tag)) {
-            $feedQuery = array('tag' => $tag);
+            $feedQuery['tag'] = $tag;
+        }
+        $fbTag = $request->get('fbTag');
+        if (!empty($fbTag)) {
+            $feedQuery['fbTag'] = $fbTag;
         }
         $cursor = $collection->find($feedQuery);
         $cursor->sort(array('title' => 1));
