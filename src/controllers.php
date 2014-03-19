@@ -203,14 +203,14 @@ $app->get('/'. $app['config']['app']['api_version'] .'/tweets',function (Request
 			$error = current($results['errors']);
 			$response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => array('error'=>$error))), 500,array('Content-Type' => 'application/json'));
 		} else {
-    foreach ($results as $item) {
-        $t['id'] = $item['id_str'];
-        $t['text'] = $item['text'];
-        $t['user'] = $item['user']['screen_name'];
-        $t['url'] = 'https://twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'];
-        $tweets[] = $t;
-    }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
+	    foreach ($results as $item) {
+	        $t['id'] = $item['id_str'];
+	        $t['text'] = $item['text'];
+	        $t['user'] = $item['user']['screen_name'];
+	        $t['url'] = 'https://twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'];
+	        $tweets[] = $t;
+	    }
+	    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
     return $response;
 });
 
@@ -235,3 +235,19 @@ $app->get('/utility/foursquare/oauth', function () use ($app) {
     }
 });
 
+// Retrive twitter's user lists
+$app->get('/utility/twitter/lists/{user}', function (Request $request, $user) use ($app)
+{
+	$lists = $app['twitter']->lists($app['config']['twitter']['consumer_key'], $app['config']['twitter']['consumer_secret'], $app['config']['twitter']['access_token'], $app['config']['twitter']['access_token_secret']);
+	$results = array();
+	if (is_int($user) || is_string($user)) {
+		$results = $lists->getAllLists($user);
+		if (!empty($results['errors'])) {
+			$results = array();
+		}
+	}
+	
+	$response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $results)), 200,array('Content-Type' => 'application/json'));
+	
+	return $response;
+});
