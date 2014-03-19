@@ -211,6 +211,7 @@ $app->get('/'. $app['config']['app']['api_version'] .'/tweets',function (Request
 	        $tweets[] = $t;
 	    }
 	    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
+	}
     return $response;
 });
 
