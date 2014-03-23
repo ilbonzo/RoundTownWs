@@ -118,21 +118,17 @@ $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (R
         $result = $venue->search(null, $app['config']['geo']['latitude'], $app['config']['geo']['longitude'],$tagsArray);
         $places = array();
         foreach ($result['response']['venues'] as $item) {
-            isset($item['location']['address']) ? $address = $item['location']['address'] : $address = '';
-            isset($item['contact']['phone']) ? $phone = $item['contact']['phone'] : $phone = '';
-            isset($item['contact']['twitter']) ? $twitter = $item['contact']['twitter'] : $twitter = '';
-            isset($item['url']) ? $url = $item['url'] : $url = '';
-            isset($item['categories'][0]) ? $icon = $item['categories'][0]['icon']['prefix'] . 'bg_88' . $item['categories'][0]['icon']['suffix'] : $icon = 'https://foursquare.com/img/categories_v2/none_bg_88.png';
+            $icon = isset($item['categories'][0]) ? $item['categories'][0]['icon']['prefix'] . 'bg_88' . $item['categories'][0]['icon']['suffix'] : 'https://foursquare.com/img/categories_v2/none_bg_88.png';
             $p = array(
                 'id' => $item['id'],
                 'name' => $item['name'],
-                'address' => $address,
+                'address' => isset($item['location']['address']) ? $item['location']['address'] : '',
                 'lat' => $item['location']['lat'],
                 'lng' => $item['location']['lng'],
-                'phone' => $phone,
-                'twitter' => $twitter,
-                'url' => $url,
-                'foursquare' => $item['canonicalUrl'],
+                'phone' => isset($item['contact']['phone']) ? $item['contact']['phone'] : '',
+                'twitter' => isset($item['contact']['twitter']) ? $item['contact']['twitter'] : '',
+                'url' => isset($item['url']) ? $item['url'] : '',
+                'foursquare' => isset($item['canonicalUrl']) ? $item['canonicalUrl'] : "" ,
                 'icon' => $icon
             );
             $places[] = $p;
@@ -203,14 +199,19 @@ $app->get('/'. $app['config']['app']['api_version'] .'/tweets',function (Request
     $lists = $app['twitter']->lists($app['config']['twitter']['consumer_key'], $app['config']['twitter']['consumer_secret'], $app['config']['twitter']['access_token'], $app['config']['twitter']['access_token_secret']);
     $results = $lists->getTweets($app['config']['twitter']['list_id']);
     $tweets = array();
-    foreach ($results as $item) {
-        $t['id'] = $item['id_str'];
-        $t['text'] = $item['text'];
-        $t['user'] = $item['user']['screen_name'];
-        $t['url'] = 'https://twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'];
-        $tweets[] = $t;
-    }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
+		if (!empty($results['errors'])) {
+			$error = current($results['errors']);
+			$response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => array('error'=>$error))), 500,array('Content-Type' => 'application/json'));
+		} else {
+	    foreach ($results as $item) {
+	        $t['id'] = $item['id_str'];
+	        $t['text'] = $item['text'];
+	        $t['user'] = $item['user']['screen_name'];
+	        $t['url'] = 'https://twitter.com/' . $item['user']['screen_name'] . '/status/' . $item['id_str'];
+	        $tweets[] = $t;
+	    }
+	    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $tweets)), 200,array('Content-Type' => 'application/json'));
+	}
     return $response;
 });
 
@@ -235,3 +236,19 @@ $app->get('/utility/foursquare/oauth', function () use ($app) {
     }
 });
 
+// Retrive twitter's user lists
+$app->get('/utility/twitter/lists/{user}', function (Request $request, $user) use ($app)
+{
+	$lists = $app['twitter']->lists($app['config']['twitter']['consumer_key'], $app['config']['twitter']['consumer_secret'], $app['config']['twitter']['access_token'], $app['config']['twitter']['access_token_secret']);
+	$results = array();
+	if (is_int($user) || is_string($user)) {
+		$results = $lists->getAllLists($user);
+		if (!empty($results['errors'])) {
+			$results = array();
+		}
+	}
+	
+	$response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $results)), 200,array('Content-Type' => 'application/json'));
+	
+	return $response;
+});
