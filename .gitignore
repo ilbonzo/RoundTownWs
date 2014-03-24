@@ -1,7 +1,8 @@
-vendor/*
-composer.phar
-silex.log
+www/vendor/*
+www/composer.phar
+www/silex.log
 .idea
 nbproject/*
-cache/*
-config/settings.yml
+www/cache/*
+www/config/settings.yml
+.vagrant

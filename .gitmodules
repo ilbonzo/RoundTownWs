@@ -1,3 +1,3 @@
-[submodule "modules/eden"]
+[submodule "www/modules/eden"]
 	path = www/modules/eden
 	url = https://github.com/ilbonzo/eden
