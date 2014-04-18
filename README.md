@@ -27,7 +27,17 @@ _/places/:id_
 Will return details of place 
 
 _/places/:id/images_  
-Will return list of images of the place 
+Will return list of images of the place
+
+_/tweets_
+Will return list of tweets
+
+_/tweets?from=list_
+Will return list of tweets from specific list
+
+_/tweets?from=search_
+Will return list of tweets from specific search query
+
 
 
 ### Add to Vhost

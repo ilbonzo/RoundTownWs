@@ -5,6 +5,7 @@ use Silex\Provider\UrlGeneratorServiceProvider;
 use Silex\Provider\ValidatorServiceProvider;
 use SimplePie as SP;
 use RoundTownWs\Utils\PlaceUtility;
+use RoundTownWs\Utils\TweetUtility;
 
 require_once '../modules/eden/library/eden.php';
 require_once '../modules/eden/library/eden/foursquare.php';
@@ -46,6 +47,9 @@ $app['twitter'] = function() {
 //add utils
 $app['placeutility'] = function () {
     return new PlaceUtility();
+};
+$app['tweetutility'] = function () {
+    return new TweetUtility();
 };
 
 require_once __DIR__.'/../src/models.php';

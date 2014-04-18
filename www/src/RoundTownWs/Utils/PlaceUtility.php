@@ -11,18 +11,18 @@ class PlaceUtility {
 
     }
 
-/**
- * Compare name  off venues
- */
+    /**
+     * Compare name  off venues
+     */
     public function sortByName($a, $b) {
         $a['name'] = strtolower($a['name']);
         $b['name'] = strtolower($b['name']);
         return strcmp($a['name'], $b['name']);
     }
 
-/**
- *
- */
+    /**
+     *
+     */
     public function getImageByGroups($groups, $format = 'normal') {
         switch ($format) {
             case 'thumb':
