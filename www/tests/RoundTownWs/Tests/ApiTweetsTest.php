@@ -5,7 +5,7 @@ require_once __DIR__ . '/../../../vendor/autoload.php';
 
 use Silex\WebTestCase;
 
-class TownTest extends WebTestCase {
+class TweetsTest extends WebTestCase {
 
     public function createApplication() {
         $app = require __DIR__ . '/../../../src/app.php';
@@ -17,15 +17,10 @@ class TownTest extends WebTestCase {
         return $app;
     }
 
-    public function testApiTowns() {
+    public function testApiTweets() {
         $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/towns');
+        $crawler = $client->request('GET', '/1.0/tweets');
         $this->assertTrue($client->getResponse()->isOk());
     }
 
-    public function testApiTown() {
-        $client = $this->createClient();
-        $crawler = $client->request('GET', '/api/town/1');
-        $this->assertTrue($client->getResponse()->isOk());
-    }
 }

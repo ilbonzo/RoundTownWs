@@ -7,9 +7,9 @@ use SimplePie as SP;
 use RoundTownWs\Utils\PlaceUtility;
 use RoundTownWs\Utils\TweetUtility;
 
-require_once '../modules/eden/library/eden.php';
-require_once '../modules/eden/library/eden/foursquare.php';
-require_once '../modules/eden/library/eden/twitter.php';
+require_once __DIR__ . '/../modules/eden/library/eden.php';
+require_once __DIR__ . '/../modules/eden/library/eden/foursquare.php';
+require_once __DIR__ . '/../modules/eden/library/eden/twitter.php';
 
 // Define application environment
 defined('APPLICATION_ENV')

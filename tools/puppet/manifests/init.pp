@@ -63,6 +63,11 @@ class php-dev {
         cwd => "/workspace/www",
         unless  => "test -e /workspace/www/composer.json",
       }
+
+    exec { 'install phpunit':
+        command => 'composer global require "phpunit/phpunit=4.2.*"',
+        path    => "/usr/local/bin/:/bin/"
+      }
 }
 
 class {'mongodb':}
