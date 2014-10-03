@@ -62,6 +62,9 @@ Developer instructions
 
     $ [copy content of /tools/data/createdb.txt on mongo shell]
 
+* create file www/config/settings.yml from settings.yml.sample
+* create file www/silex.log and set permission to 777
+
 * open browser at http://api.roundtownws.dev/
 * /workspace/www is the working directory
 

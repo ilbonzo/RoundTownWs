@@ -1,0 +1,31 @@
+app:
+    version: 1.0
+    api_version: '1.0'
+template:
+    json: base.json.twig
+env:
+    dev:
+        cache: false
+    prod:
+        cache: false
+db:
+    host: localhost
+    name: roundtown
+twig:
+geo:
+    latitude: 44.640833
+    longitude: 11.185
+foursquare:
+    uri_redirect: http://api.sanzvan.it/utility/foursquare/oauth
+    client_id:
+    client_secret:
+    access_token:
+    venue_id: 4c6fd9eed274b60ca4aed70d
+twitter:
+    consumer_key:
+    consumer_secret:
+    access_token:
+    access_token_secret:
+    list_id: 87364332
+    result_per_page: 50
+    search_query: '#SanZvan OR Persiceto OR #Persiceto'
