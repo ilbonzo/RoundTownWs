@@ -15,10 +15,10 @@ class apache_config
         docroot_owner   => 'vagrant',
         docroot_group   => 'vagrant',
         logroot         => '/var/log',
-        override        => 'All'
+        override        => 'All',
+        setenv          => 'APPLICATION_ENV dev'
     }
 
     apache::mod { 'rewrite': }
 
 }
-

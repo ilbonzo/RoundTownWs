@@ -21,7 +21,7 @@ class git {
 }
 
 class php-dev {
-    package { ['php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug'] :
+    package { ['php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug', 'php5-cli'] :
         ensure => 'latest'
     }
 
@@ -46,31 +46,39 @@ class php-dev {
     exec { 'install-composer':
         command => 'curl -s https://getcomposer.org/installer | php && mv composer.phar /usr/local/bin/composer',
         creates => '/usr/local/bin/composer',
-        require => Package['curl', 'php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug']
+        require => Package['curl', 'php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug', 'php5-cli']
     }
 
-    exec { 'run composer for silex when composer is used':
+    exec { 'run-composer':
         command => 'composer --verbose install',
         cwd => "/workspace/www",
         onlyif  => "test -e /workspace/www/composer.json",
         timeout => 0,
         tries   => 10,
-        require => Exec['install-composer'],
-      }
+        require => Exec['install-composer']
+    }
 
     exec { 'run vendor installation from deps when composer is not used':
         command => 'php bin/vendors update',
         cwd => "/workspace/www",
-        unless  => "test -e /workspace/www/composer.json",
-      }
+        unless  => "test -e /workspace/www/composer.json"
+    }
 
-    exec { 'install phpunit':
-        command => 'composer global require "phpunit/phpunit=4.2.*"',
-        path    => "/usr/local/bin/:/bin/"
-      }
+    exec { 'install-phpunit':
+        command => '/usr/local/bin/composer global require "phpunit/phpunit=4.2.*"',
+        path    => "/usr/local/bin/:/bin/:/usr/bin/",
+        require => Exec['install-composer','run-composer']
+    }
+
+    file_line { 'Append a line to /etc/php5/apache2/php.ini':
+      path => '/etc/php5/apache2/php.ini',
+      line => 'extension=mongo.so',
+      require => Exec['pecl-mongo-install']
+    }
 }
 
 class {'mongodb':}
+
 
 include apt
 include apache_config
