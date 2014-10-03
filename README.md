@@ -49,7 +49,7 @@ Developer instructions
 
 * install VirtualBox
 * install Vagrant
-* add 192.168.140.12 api.roundtown.dev to your /etc/hosts
+* add '192.168.140.12 api.roundtown.dev' to your /etc/hosts
 * git clone [your forked repo]
 * cd RoundTownWs
 * $ git submodule update --init --recursive
