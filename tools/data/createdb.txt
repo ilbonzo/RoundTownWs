@@ -1,0 +1,60 @@
+use roundtown
+db.dropDatabase()
+use roundtown
+
+//Comune
+db.feeds.insert({'tag':'Comune','title':'Notizie Comune Persiceto','url':'http://www.comunepersiceto.it/notizie-home-page/RSS'})
+db.feeds.insert({'tag':'Comune','title':'Comunicati Stampa Comune Persiceto','url':'http://www.comunepersiceto.it/notizie/ledicola-comunale/comunicati-stampa/comunicati-stampa-2014/RSS'})
+db.feeds.insert({'tag':'Comune','title':'Rassegna Stampa Comune Persiceto','url':'http://www.comunepersiceto.it/notizie/ledicola-comunale/rassegna-stampa/rassegna-stampa-2014/RSS'})
+
+//Scuola
+db.feeds.insert({'tag':'Scuola','title':'Direzione Didattica', 'url':'http://www.ddpersiceto.it/rss.xml'})
+db.feeds.insert({'tag':'Scuola','title':'Istituto Comprensivo', 'url':'http://www.icpersiceto.it/feed'})
+db.feeds.insert({'tag':'Scuola','title':'Isis Archimede','url':'http://www.isis-archimede.it/index.php?format=feed&type=rss'})
+
+//Varie
+db.feeds.insert({'tag':'Varie','title':'Persiceto Caffe','url':'http://www.persicetocaffe.com/feed'})
+db.feeds.insert({'tag':'Varie','title':'Persiceto Shopping','url':'http://www.persicetoinshopping.it/feed/'})
+db.feeds.insert({'tag':'Varie','title':'Marcolfa.it','url':'http://www.marcolfa.it/feed/?post_type=ad_listing'})
+
+//Associazioni
+db.feeds.insert({'tag':'Associazioni','title':'ProLoco Persiceto','url':'http://www.proloco-persiceto.org/feed/'})
+db.feeds.insert({'tag':'Associazioni','title':'Enpa Persiceto','url':'http://www.enpapersiceto.it/gattile/feed/'})
+db.feeds.insert({'tag':'Associazioni','title':'Gruppo Astrofili Persicetani','url':'http://www.gapers.it/xml/rss.asp'})
+
+//Musei
+db.feeds.insert({'tag':'Musei','title':'Museo Archeologico Ambientale','url':'http://www.museoarcheologicoambientale.it/rss.asp?iId=JMMGD'})
+db.feeds.insert({'tag':'Musei','title':'Museo del Cielo e della Terra','url':'http://www.museocieloeterra.org/rss.asp?iId=JIGKM'})
+
+//Spettacoli
+db.feeds.insert({'tag':'Spettacoli','title':'Cine Teatro Fanin','url':'http://www.cineteatrofanin.it/feed/rss/'});
+db.feeds.insert({'tag':'Spettacoli','title':'Cineci','url':'http://www.comingsoon.it/cinema/rss.asp?prov=94&city=11918'});
+
+//Facebook Instituzionali
+db.feeds.insert({'tag':'Facebook','title':'Fb Comune Persiceto','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=119974783863', 'fbTag': 'Istituzionali'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Sindaco Renato Mazzuca','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=139778692882238', 'fbTag': 'Istituzionali'});
+
+//Facebook Carnevale
+db.feeds.insert({'tag':'Facebook','title':'Fb Associazione Carnevale','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=279840852092312', 'fbTag': 'Carnevale'});
+
+//Facebook Sport
+db.feeds.insert({'tag':'Facebook','title':'Fb Persiceto Knights','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=253636051358150', 'fbTag': 'Sport'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Persiceto Rugby','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=115568365124488', 'fbTag': 'Sport'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Piscina Persiceto Sogese','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=404996859558018', 'fbTag': 'Sport'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Marco Belinelli','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=160406737323588', 'fbTag': 'Sport'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Persiceto85','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=401906293230484', 'fbTag': 'Sport'});
+
+//Facebook Associazioni
+db.feeds.insert({'tag':'Facebook','title':'Fb Giochi e Parole ','url':'https://facebook-rss.herokuapp.com/rss/205864952840130', 'fbTag': 'Associazioni'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Scout','url':'https://facebook-rss.herokuapp.com/rss/326965520728853', 'fbTag': 'Associazioni'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Arci Akkata','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=337336522644', 'fbTag': 'Associazioni'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Planetario e Osservatorio Astronomico di San Giovanni in Persiceto','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=152569126954', 'fbTag': 'Associazioni'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Labici Eco Laboratorio','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=444800292258012', 'fbTag': 'Associazioni'});
+
+//Facebook
+db.feeds.insert({'tag':'Facebook','title':'Fb Maddalens Brother','url':'http://www.facebook.com/feeds/page.php?format=rss20&id=37684528879', 'fbTag': 'Musica'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Coro Ragazzi Cantori','url':'https://facebook-rss.herokuapp.com/rss/271265449582507', 'fbTag': 'Musica'});
+
+//Facebook
+db.feeds.insert({'tag':'Facebook','title':'Fb Piazza del Popolo Persicetano','url':'https://facebook-rss.herokuapp.com/rss/364173203652954', 'fbTag': 'Gruppi'});
+db.feeds.insert({'tag':'Facebook','title':'Fb Sei di Sangio','url':'https://facebook-rss.herokuapp.com/rss/206533426206885', 'fbTag': 'Gruppi'});
