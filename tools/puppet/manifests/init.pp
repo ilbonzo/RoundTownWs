@@ -21,7 +21,7 @@ class git {
 }
 
 class php-dev {
-    package { ['php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug', 'php5-cli'] :
+    package { ['php5-dev','php-pear', 'php5-curl', 'php5-gd', 'php5-xdebug', 'php5-cli'] :
         ensure => 'latest'
     }
 
@@ -38,9 +38,11 @@ class php-dev {
     }
 
     exec { 'pecl-mongo-install':
-        command => 'pecl install mongo',
+        command => 'yes no | pecl install mongo >> /tmp/install.log',
         unless => "pecl info mongo",
-        require => Package['php-pear', 'make'],
+        # user => root,
+        # group => root,
+        require => Package['php-pear', 'php5-dev', 'make'],
     }
 
     exec { 'install-composer':
@@ -52,6 +54,7 @@ class php-dev {
     exec { 'run-composer':
         command => 'composer --verbose install',
         cwd => "/workspace/www",
+        environment => ["COMPOSER_HOME=/home/vagrant/.composer"],
         onlyif  => "test -e /workspace/www/composer.json",
         timeout => 0,
         tries   => 10,
@@ -67,11 +70,25 @@ class php-dev {
     exec { 'install-phpunit':
         command => '/usr/local/bin/composer global require "phpunit/phpunit=4.2.*"',
         path    => "/usr/local/bin/:/bin/:/usr/bin/",
-        require => Exec['install-composer','run-composer']
+        environment => ["COMPOSER_HOME=/home/vagrant/.composer"],
+        require => Exec['install-composer']
+    }
+
+    exec { 'link-phpunit':
+        command => 'ln -s /home/vagrant/.composer/vendor/phpunit/phpunit/phpunit /usr/local/bin/phpunit >> /workspace/install.log',
+        path    => "/usr/local/bin/:/bin/:/usr/bin/",
+        creates => '/usr/local/bin/phpunit',
+        require => Exec['install-phpunit']
     }
 
     file_line { 'Append a line to /etc/php5/apache2/php.ini':
       path => '/etc/php5/apache2/php.ini',
+      line => 'extension=mongo.so',
+      require => Exec['pecl-mongo-install']
+    }
+
+    file_line { 'Append a line to /etc/php5/cli/php.ini':
+      path => '/etc/php5/cli/php.ini',
       line => 'extension=mongo.so',
       require => Exec['pecl-mongo-install']
     }

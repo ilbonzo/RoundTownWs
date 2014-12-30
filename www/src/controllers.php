@@ -102,6 +102,27 @@ $app->get('/'. $app['config']['app']['api_version'] .'/images',function (Request
 });
 
 /**
+ * instagram images @TODO
+ */
+$app->get('/'. $app['config']['app']['api_version'] .'/images/instagram',function (Request $request) use ($app) {
+
+    // $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
+    // $result = $venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue');
+
+    $photos = array();
+    // foreach ($result['response']['photos']['items'] as $item) {
+    //     $p['url'] = $item['prefix'] . 'width960' . $item['suffix'];
+    //     $p['url_thumb'] = $item['prefix'] . '150x150' . $item['suffix'];
+    //     isset($item['user']['lastName']) ? $lastName = ' ' . $item['user']['lastName'] : $lastName = '';
+    //     $p['user'] = $item['user']['firstName'] . $lastName;
+    //     $photos[] = $p;
+    // }
+    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $photos)), 200,array('Content-Type' => 'application/json'));
+    return $response;
+});
+
+
+/**
  * Places
  */
 $app->get('/'. $app['config']['app']['api_version'] .'/places/{id}', function (Request $request, $id) use ($app) {
