@@ -8,25 +8,25 @@ API 1.0
 ---------
 
 
-_/feeds_  
+_/feeds_
 Will return list of feeds
 
-_/feeds?tag=:tag_  
+_/feeds?tag=:tag_
 Will return list of feeds with tag
 
-_/feeds/:id_  
+_/feeds/:id_
 Will return list of news of feed
 
-_/images_  
-Will return list of images
+_/images_
+Will return list of image
 
-_/places_  
+_/places_
 Will return list of places
 
-_/places/:id_  
+_/places/:id_
 Will return details of place
 
-_/places/:id/images_  
+_/places/:id/images_
 Will return list of images of the place
 
 _/tweets_

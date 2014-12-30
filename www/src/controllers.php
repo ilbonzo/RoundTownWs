@@ -8,9 +8,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 //home page
 $app->get('/', function () use ($app) {
     return $app['twig']->render('index.html', array());
-})
-->bind('homepage')
-;
+})->bind('homepage');
 
 $app->error(function (\Exception $e, $code) use ($app) {
     if ($app['debug']) {
@@ -81,46 +79,46 @@ $app->get('/'. $app['config']['app']['api_version'] .'/feeds/{id}', function (Re
     return $response;
 })->value('id', '');
 
-//foursquare
 /**
  * images
  */
 $app->get('/'. $app['config']['app']['api_version'] .'/images',function (Request $request) use ($app) {
 
+    $photos = array();
+    // instagram
+    $media = $app['instagram']->media($app['config']['instagram']['access_token']);
+    $result = $media->search(array(
+                             'lat' => $app['config']['geo']['latitude'],
+                             'lng' => $app['config']['geo']['longitude'],
+                             'distance' => $app['config']['instagram']['distance']
+                              ));
+    foreach ($result['data'] as $item) {
+        $p['url'] = $item['images']['standard_resolution']['url'];
+        $p['url_thumb'] = $item['images']['thumbnail']['url'];
+        $p['user'] = $item['caption']['from']['username'];
+        $p['time'] = $item['created_time'];
+        $photos[] = $p;
+    }
+
+    //foursquare
     $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
     $result = $venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue');
-    $photos = array();
     foreach ($result['response']['photos']['items'] as $item) {
         $p['url'] = $item['prefix'] . 'width960' . $item['suffix'];
         $p['url_thumb'] = $item['prefix'] . '150x150' . $item['suffix'];
         isset($item['user']['lastName']) ? $lastName = ' ' . $item['user']['lastName'] : $lastName = '';
         $p['user'] = $item['user']['firstName'] . $lastName;
+        $p['time'] = $item['createdAt'];
         $photos[] = $p;
     }
+
+    usort($photos, function($a, $b) use ($app) {
+        return $app['imageutility']->sortByTime($a, $b);
+    });
+
     $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $photos)), 200,array('Content-Type' => 'application/json'));
     return $response;
 });
-
-/**
- * instagram images @TODO
- */
-$app->get('/'. $app['config']['app']['api_version'] .'/images/instagram',function (Request $request) use ($app) {
-
-    // $venue = $app['foursquare']->venue($app['config']['foursquare']['access_token']);
-    // $result = $venue->getVenuePhoto($app['config']['foursquare']['venue_id'],'venue');
-
-    $photos = array();
-    // foreach ($result['response']['photos']['items'] as $item) {
-    //     $p['url'] = $item['prefix'] . 'width960' . $item['suffix'];
-    //     $p['url_thumb'] = $item['prefix'] . '150x150' . $item['suffix'];
-    //     isset($item['user']['lastName']) ? $lastName = ' ' . $item['user']['lastName'] : $lastName = '';
-    //     $p['user'] = $item['user']['firstName'] . $lastName;
-    //     $photos[] = $p;
-    // }
-    $response = new Response($app['twig']->render($app['config']['template']['json'], array('data' => $photos)), 200,array('Content-Type' => 'application/json'));
-    return $response;
-});
-
 
 /**
  * Places

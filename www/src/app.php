@@ -6,10 +6,12 @@ use Silex\Provider\ValidatorServiceProvider;
 use SimplePie as SP;
 use RoundTownWs\Utils\PlaceUtility;
 use RoundTownWs\Utils\TweetUtility;
+use RoundTownWs\Utils\ImageUtility;
 
 require_once __DIR__ . '/../modules/eden/library/eden.php';
 require_once __DIR__ . '/../modules/eden/library/eden/foursquare.php';
 require_once __DIR__ . '/../modules/eden/library/eden/twitter.php';
+require_once __DIR__ . '/../modules/eden/library/eden/instagram.php';
 
 // Define application environment
 defined('APPLICATION_ENV')
@@ -44,12 +46,20 @@ $app['twitter'] = function() {
     return eden('twitter');
 };
 
+//add eden instagram
+$app['instagram'] = function() {
+    return eden('instagram');
+};
+
 //add utils
 $app['placeutility'] = function () {
     return new PlaceUtility();
 };
 $app['tweetutility'] = function () {
     return new TweetUtility();
+};
+$app['imageutility'] = function () {
+    return new ImageUtility();
 };
 
 require_once __DIR__.'/../src/models.php';
