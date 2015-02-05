@@ -68,6 +68,10 @@ Developer instructions
 * open browser at http://api.roundtownws.dev/
 * /workspace/www is the working directory
 
+* cd /workspace/app
+* npm install
+
+
 ### Config Vhost
 
   For production change

@@ -33,9 +33,9 @@ class php-dev {
         require => Class['apt']
     }
 
-    package { 'make':
-        require => Class['apt']
-    }
+    # package { 'make':
+    #     require => Class['apt']
+    # }
 
     exec { 'pecl-mongo-install':
         command => 'yes no | pecl install mongo >> /tmp/install.log',
@@ -94,6 +94,14 @@ class php-dev {
     }
 }
 
+class express {
+    package { 'express-generator':
+        ensure => installed,
+        provider => 'npm',
+        require => Class['nodejs', 'git']
+    }
+}
+
 class {'mongodb':}
 
 
@@ -101,3 +109,6 @@ include apt
 include apache_config
 include git
 include php-dev
+include nodejs
+include express
+

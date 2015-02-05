@@ -6,3 +6,6 @@ nbproject/*
 www/cache/*
 www/config/settings.yml
 .vagrant
+
+app/node_modules/*
+app/config/settings.js

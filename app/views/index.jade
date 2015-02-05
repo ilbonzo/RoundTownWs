@@ -1,0 +1,9 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to #{title}
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>var socket = io.connect();socket.on('news', function (data) {console.log(data);});socket.on('tweet', function (data) {console.log(data);});socket.on('photo', function (data) {console.log(data);});</script>
+
