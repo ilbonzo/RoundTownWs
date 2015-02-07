@@ -11,3 +11,5 @@ app/node_modules/*
 app/config/settings.js
 app/public/bower_components/*
 app/public/javascripts/.module-cache/*
+
+tools/ngrok*
