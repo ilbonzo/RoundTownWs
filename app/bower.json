@@ -1,0 +1,20 @@
+{
+  "name": "RoundTown",
+  "main": "app.js",
+  "version": "0.0.1",
+  "homepage": "https://github.com/ilbonzo/RoundTownWs",
+  "authors": [
+    "Matteo Magni <matteo@magni.me>"
+  ],
+  "license": "GPL",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2"
+  }
+}

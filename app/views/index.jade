@@ -2,8 +2,10 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  div(id='tweets')
 
-  <script src="/socket.io/socket.io.js"></script>
-  <script>var socket = io.connect();socket.on('news', function (data) {console.log(data);});socket.on('tweet', function (data) {console.log(data);});socket.on('photo', function (data) {console.log(data);});</script>
+  script(src='/socket.io/socket.io.js', type='text/javascript')
+  script(src='/bower_components/react/react.js', type='text/javascript')
+  script(src='/bower_components/react/JSXTransformer.js', type='text/javascript')
+  script(src='/javascripts/tweet.js', type='text/jsx')
 

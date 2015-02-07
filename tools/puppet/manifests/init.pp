@@ -102,6 +102,22 @@ class express {
     }
 }
 
+class bower {
+    package { 'bower':
+        ensure => installed,
+        provider => 'npm',
+        require => Class['nodejs', 'git']
+    }
+}
+
+class react_tools {
+    package { 'react-tools':
+        ensure => installed,
+        provider => 'npm',
+        require => Class['nodejs', 'git']
+    }
+}
+
 class {'mongodb':}
 
 
@@ -111,4 +127,6 @@ include git
 include php-dev
 include nodejs
 include express
+include bower
+include react_tools
 

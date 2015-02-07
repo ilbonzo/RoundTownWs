@@ -6,3 +6,121 @@ body {
 a {
   color: #00B7FF;
 }
+
+
+body {
+    margin: 0;
+    padding: 0;
+    background: #fff;
+    font: 100% Arial, sans-serif;
+}
+
+p {
+    margin: 0;
+}
+
+#tweets {
+    width: 350px;
+    border: 1px solid #e8e8e8;
+    background: #fff;
+    border-radius: 5px;
+    color: #000;
+    margin: 0 auto;
+}
+
+#tweets .timeline-header {
+    margin: 0;
+    padding: 8px;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-bottom-color: #e8e8e8;
+    min-height: 20px;
+}
+
+#tweets .timeline-header h1.summary {
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 24px;
+    color: #292f33;
+    margin: 0px;
+    float: left;
+}
+
+#tweets .timeline-header iframe {
+    float: right;
+}
+
+#tweets-content {
+    width: 100%;
+    margin: 0 auto;
+    font-size: 12px;
+    overflow-y: scroll;
+    min-height: 550px;
+}
+
+#tweets-content ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+#tweets-content ul li {
+    padding: 6px 8px;
+    border-width: 0 0 1px;
+    border-style: solid;
+    border-bottom-color: #e8e8e8;
+    margin: 0;
+}
+
+.tweet-avatar {
+    float: left;
+}
+
+.tweet-content {
+}
+
+.avatar {
+    background: #fff;
+    border-radius: 4px;
+    margin-right: 8px;
+    width: 32px;
+    height: 32px;
+}
+
+
+#tweets-content ul li a {
+    text-decoration: none;
+    color: #000;
+}
+#tweets-content ul li a:hover {
+    text-decoration: underline;
+    color: #000;
+}
+
+#tweets-content ul li .tweet-author {
+    font-weight: bold;
+    color: #292f33;
+    font-size: 14px;
+    line-height: 16px;
+    padding-bottom: 3px;
+    min-height: 35px;
+}
+#tweets-content ul li .tweet-nickname {
+    font-weight: normal;
+    color: #707070;
+    font-size: 12px;
+    line-height: 16px;
+    padding-bottom: 3px;
+    display: block;
+}
+
+#tweets-content ul li .tweet-text {
+    font-size: 12px;
+    line-height: 16px;
+    color: #292f33;
+}
+
+#tweets-content ul li small {
+    display: block;
+    font-style: italic;
+}
